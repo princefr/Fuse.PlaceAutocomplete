@@ -1,0 +1,28 @@
+<Extensions Backend="CPlusPlus">
+      <Require Condition="Android" AndroidManifest.ApplicationElement>
+    <![CDATA[
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="" />
+    ]]>
+  </Require>
+
+      <Require Condition="iOS" Xcode.Plist.Element>
+        <![CDATA[
+        <key>NSBluetoothPeripheralUsageDescription</key>
+      	<string>The app needs to connect to Bluetooth peripherals to detect the SumUp Card Terminal correctly. Please confirm with OK as you cannot use your card reader otherwise.</string>
+      	<key>NSLocationUsageDescription</key>
+      	<string>To provide a secure service, we need to know your location. Without location information, you cannot use SumUp.</string>
+      	<key>NSLocationWhenInUseUsageDescription</key>
+      	<string>To provide a secure service, we need to know your location. Without location information, you cannot use SumUp.</string>
+      	<key>NSMicrophoneUsageDescription</key>
+      	<string>The app needs to access the microphone of your audio jack in order for the SumUp Card Reader to be detected correctly. Please confirm with OK as you cannot use your card reader otherwise.</string>
+        <key>LSApplicationQueriesSchemes</key>
+
+        <array>
+            <string>comgooglemaps</string>
+            <string>comgooglemaps-x-callback</string>
+        </array>
+        ]]>
+    </Require>
+</Extensions>

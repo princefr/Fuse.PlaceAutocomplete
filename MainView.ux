@@ -1,0 +1,65 @@
+<App>
+	<JavaScript>
+		var Observable = require("FuseJS/Observable")
+		var predictions = Observable()
+    var PlaceAutocompleModule = require("PlaceAutocompleModule")
+
+		function predictionfrom(id, description){
+          var self = this;
+          this.id = id;
+          this.description = Observable(description)
+        }
+
+function searchPLace(arg){
+	console.log(arg.value)
+  var input = "&input=" + arg.value;
+  var url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyDiUL6qwvNmEJMAPJUl5XZiOAGfxzEkmxE&language=fr" + input
+    fetch(url, {
+        method: 'POST'
+    }).then(function(results){
+      var obj = JSON.parse(results._bodyInit)
+        predictions.refreshAll(obj.predictions.map(function(x){
+          return new predictionfrom(x.id, x.description)
+        })
+      )
+    }).catch(function(err){
+    	console.log(JSON.stringify(err))
+    })
+}
+
+
+
+var resultsValue = Observable()
+
+function launch(){
+  PlaceAutocompleModule.Launch().then(function(results){
+    resultsValue.value = results
+    console.log(JSON.stringify(results))
+  }, function(err){
+    console.log(JSON.stringify(err))
+  })
+}
+
+
+module.exports = {
+	searchPLace: searchPLace,
+	predictions: predictions,
+  launch: launch,
+  resultsValue: resultsValue
+}
+	</JavaScript>
+
+
+	<ClientPanel>
+		<StackPanel ItemSpacing="30">
+					<TextInput ValueChanged="{searchPLace}" PlaceholderText="qss"/>
+		<Each Items="{predictions}">
+			<Text Value="{description}"/>
+		</Each>
+
+
+    <Button Clicked="{launch}" Text="launch autocomplete"/>
+    <Text Value="{resultsValue}"/>
+		</StackPanel>
+	</ClientPanel>
+</App>
