@@ -19,29 +19,34 @@ namespace Fuse.PlaceAutocomple
     [Require("Source.Include", "GooglePlaces/GooglePlaces.h")]
     [Require("Source.Include", "GooglePlacePicker/GooglePlacePicker.h")]
     [Require("Source.Include", "GoogleMaps/GoogleMaps.h")]
+    [Require("Source.Include", "placeautocompleteIOS.h")]
+    [Require("Entity", "Fuse.PlaceAutocomple.Launch.Resolve(string)")]
   extern(iOS)
    class Launch: Promise<string>
   {
 
+
+
+  	extern(iOS) static internal ObjC.Object _iosDelegate;
+
+
+
     [Foreign(Language.ObjC)]
     public Launch()
     @{
+
     	  [GMSPlacesClient provideAPIKey:@""];
     	  [GMSServices provideAPIKey:@""];
-    	  GMSPlacePickerConfig *config = [[GMSPlacePickerConfig alloc] initWithViewport:nil];
-		  GMSPlacePickerViewController *placePicker = [[GMSPlacePickerViewController alloc] initWithConfig:config];
 
-
-		  dispatch_async(dispatch_get_main_queue(), ^{
-				[[[[UIApplication sharedApplication] keyWindow] rootViewController] presentViewController:placePicker animated:YES completion:nil];
+        	dispatch_async(dispatch_get_main_queue(), ^{
+        		GMSAutocompleteViewController *acController = [[GMSAutocompleteViewController alloc] init];
+        		AutocompliteCallBacks *del = [[AutocompliteCallBacks alloc] init];
+            	@{_iosDelegate:Set(del)};
+            	acController.delegate = @{_iosDelegate:Get()};
+				[[[[UIApplication sharedApplication] keyWindow] rootViewController] presentViewController:acController animated:YES completion:nil];
 			});
 
-
-
-
     @}
-
-
 
 
 

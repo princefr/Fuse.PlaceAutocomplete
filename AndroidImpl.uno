@@ -43,8 +43,6 @@ namespace Fuse.PlaceAutocomple
 
 
 
-
-
         Activity.subscribeToResults(new Activity.ResultListener()
           {
             @Override
