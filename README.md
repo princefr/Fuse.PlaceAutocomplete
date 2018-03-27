@@ -6,7 +6,7 @@ The Place Autocomplete service is a web service that returns place predictions i
 
 	- IOS
 
-		please activate the Google Places API for iOS in the https://console.cloud.google.com/ and replace 'APIKEY' string below with your apikey obtained in the console.
+		please activate the Google Places API for iOS in the https://console.cloud.google.com/ and replace 'APIKEY' string below with your apikey obtained in the google console.
 		file: `iosImpl.uno`
 
 		```
@@ -16,7 +16,7 @@ The Place Autocomplete service is a web service that returns place predictions i
 
 	- Android
 
-		please activate the Google Places API for Android in the https://console.cloud.google.com/ and replace 'APIKEY' string below with your apikey obtained in the console.
+		please activate the Google Places API for Android in the https://console.cloud.google.com/ and replace the android:value 'APIKEY' string below with your apikey obtained in the google console.
 		file: `geo.uxl`
 
 		```
