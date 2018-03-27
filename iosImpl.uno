@@ -60,8 +60,8 @@ namespace Fuse.PlaceAutocomplete
     static void Launch(Action<string> onSuccess, Action<string> onFailure)
     @{
 
-        [GMSPlacesClient provideAPIKey:@""];
-        [GMSServices provideAPIKey:@""];
+        [GMSPlacesClient provideAPIKey:@"APIKEY"];
+        [GMSServices provideAPIKey:@"APIKEY"];
 
           dispatch_async(dispatch_get_main_queue(), ^{
             GMSAutocompleteViewController *acController = [[GMSAutocompleteViewController alloc] init];
