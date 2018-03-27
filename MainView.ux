@@ -1,16 +1,7 @@
 <App>
 	<JavaScript>
 		var Observable = require("FuseJS/Observable")
-		var predictions = Observable()
-    var PlaceAutocompleModule = require("PlaceAutocompleModule")
-
-		function predictionfrom(id, description){
-          var self = this;
-          this.id = id;
-          this.description = Observable(description)
-        }
-
-
+    var PlaceAutocompleModule = require("PlaceAutocomplete")
 
 
 
@@ -27,8 +18,6 @@ function launch() {
 
 
 module.exports = {
-
-	predictions: predictions,
   launch: launch,
   resultsValue: resultsValue
 }
@@ -37,10 +26,7 @@ module.exports = {
 
 	<ClientPanel>
 		<StackPanel ItemSpacing="30">
-					<TextInput ValueChanged="{searchPLace}" PlaceholderText="qss"/>
-		<Each Items="{predictions}">
-			<Text Value="{description}"/>
-		</Each>
+
 
 
     <Button Clicked="{launch}" Text="launch autocomplete"/>

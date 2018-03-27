@@ -1,11 +1,11 @@
 #pragma mark - GMSAutocompleteViewControllerDelegate
 #include <Uno/Uno.h>
-#include <@{Fuse.PlaceAutocomple.Launch:Include}>
 #include <@{ObjC.Object:Include}>
 #include "placeautocompleteIOS.h"
 
 
 @interface AutocompliteCallBacks ()
+
 
 @end
 
@@ -13,8 +13,8 @@
 
 
 @implementation AutocompliteCallBacks
-
-
+@synthesize completion;
+@synthesize error;
 // To receive the results from the place picker 'self' will need to conform to
 // GMSPlacePickerViewControllerDelegate and implement this code.
 - (void)viewController:(GMSAutocompleteViewController *)viewController didAutocompleteWithPlace:(GMSPlace *)place {
@@ -23,10 +23,10 @@
     NSLog(@"Place name %@", place.name);
     NSLog(@"Place address %@", place.formattedAddress);
 
-
     NSObject *object;
     NSString *myString = place.formattedAddress;
-    @{Fuse.PlaceAutocomple.Launch.Resolve(string):Call(myString)};
+    completion(place.formattedAddress);
+
 
 }
 
@@ -43,8 +43,22 @@
 
 - (void)placePickerDidCancel:(GMSPlacePickerViewController *)viewController {
 	[[[[UIApplication sharedApplication] keyWindow] rootViewController] dismissViewControllerAnimated:YES completion:nil];
-	//[self dismissViewControllerAnimated:YES completion:nil];
   	NSLog(@"No place selected");
 }
+
+
+
+
+- (id)initWithSuccessAction:(void (^)(NSString *))onSuccess AndWithFailureAction:(void (^)(NSString *))onFailure
+{
+    self = [super init];
+    if(self){
+        completion = onSuccess;
+    }
+    return self;
+}
+
+
+
 
 @end

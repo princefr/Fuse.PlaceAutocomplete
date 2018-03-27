@@ -13,7 +13,7 @@ using Fuse.Reactive;
 
 
 
-namespace Fuse.PlaceAutocomple
+namespace Fuse.PlaceAutocomplete
 {
 
 
@@ -25,14 +25,19 @@ namespace Fuse.PlaceAutocomple
 		    public PlaceAutocompleModule()
 		    {
 		      if(_instance != null) return;
-		      Uno.UX.Resource.SetGlobalKey(_instance = this, "PlaceAutocompleModule");
+		      Uno.UX.Resource.SetGlobalKey(_instance = this, "PlaceAutocomplete");
 		      AddMember(new NativePromise<string, string>("Launch", Launch));
 		    }
 
-		        Future<string> Launch(object[] args)
-			    {
-			        return new Fuse.PlaceAutocomple.Launch();
-			    }
+	        Future<string> Launch(object[] args)
+		    {
+		    	if defined(iOS){
+		    		return  Autocomplete.Launch();
+		    	}else{
+		    		return new Fuse.PlaceAutocomplete.Launch();
+		    	}
+		        
+		    }
 
 	  }
 	  

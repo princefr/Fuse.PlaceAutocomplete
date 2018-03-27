@@ -11,7 +11,7 @@ using Uno.Threading;
 
 
 
-namespace Fuse.PlaceAutocomple
+namespace Fuse.PlaceAutocomplete
 {
 
 
@@ -40,6 +40,10 @@ namespace Fuse.PlaceAutocomple
                 } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
                     // TODO: Handle the error.
                 }
+
+
+
+
 
 
 
